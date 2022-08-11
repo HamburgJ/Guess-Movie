@@ -77,7 +77,7 @@ function SearchQuery({ setGuesses }) {
   }, []);
 
   return (
-    <Row>
+    <Row style={{ marginBottom: '15px' }}>
       <Col xs={{ offset: 2, span: 6 }}>
         <AsyncTypeahead
           id="async-pagination-example"
