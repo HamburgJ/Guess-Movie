@@ -94,7 +94,11 @@ function SearchQuery({ setGuesses }) {
         renderMenuItemChildren={(option) => (
           <div key={option.id}>
             <span>
-              {option.title} ({option.release_date.slice(0, 4)})
+              {`${option.title}${
+                option.release_date
+                  ? ` (${option.release_date.slice(0, 4)})`
+                  : ''
+              }`}
             </span>
           </div>
         )}
