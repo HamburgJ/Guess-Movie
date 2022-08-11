@@ -6,8 +6,8 @@ function App() {
       <Row>
         <Col>
           <h1 className="text-center">Guess Movie</h1>
-          <div>
-            <input placeholder="Enter Movie Title"/>
+          <div class="input-group">
+              <input type="search" id="form1" class="form-control" placeholder="Enter Movie Name Here"/>
           </div>
         </Col>
       </Row>
