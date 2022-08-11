@@ -29,6 +29,10 @@ function App() {
     const isDuplicate = guesses.some((guess) => guess.id === movie.id);
     if (isDuplicate) {
       setGameState('win');
+      return;
+    }
+    if (guesses.length === 6) {
+      setGameState('lose');
     }
   }, [guesses, movie]);
 
@@ -38,6 +42,7 @@ function App() {
     selectMovie();
   };
 
+  console.log(movie);
   const selectMovie = () => {
     //select random year between 1980 and current year
     const year =
@@ -75,6 +80,19 @@ function App() {
             <h5 className="text-center">
               You guessed the movie correctly! <br />
               <span className="text-success">
+                {movie.title} (
+                {movie.release_date ? movie.release_date.slice(0, 4) : ''})
+              </span>
+            </h5>
+          </Col>
+        </Row>
+      )}
+      {gameState === 'lose' && (
+        <Row>
+          <Col>
+            <h5 className="text-center">
+              You ran out of guesses! <br />
+              <span className="text-danger">
                 {movie.title} (
                 {movie.release_date ? movie.release_date.slice(0, 4) : ''})
               </span>
