@@ -61,26 +61,28 @@ function App() {
       return;
     }
     const isDuplicate = guesses.some((guess) => guess.id === movie.id);
-
     if (isDuplicate) {
       setGameState('win');
+    } else if (guesses.length === 6) {
+      setGameState('lose');
+    }
+  }, [guesses, movie, gameState]);
+
+  useEffect(() => {
+    if (gameState === 'win') {
       setScore((score) => ({
         wins: score.wins + 1,
         losses: score.losses,
         numGuesses: [...score.numGuesses, guesses.length],
       }));
-      return;
-    }
-
-    if (guesses.length === 6) {
-      setGameState('lose');
+    } else if (gameState === 'lose') {
       setScore((score) => ({
         wins: score.wins,
         losses: score.losses + 1,
         numGuesses: score.numGuesses,
       }));
     }
-  }, [guesses, movie, gameState]);
+  }, [gameState]);
 
   useEffect(() => {
     localStorage.setItem('score', JSON.stringify(score));
