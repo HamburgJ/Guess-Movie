@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useState } from 'react';
-import { Button, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { fetchData } from '../lib/Api';
 
@@ -26,7 +26,7 @@ function SearchQuery({ setGuesses }) {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
   const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState([]);
 
   const handleInputChange = (q) => {
     setQuery(q);
@@ -104,19 +104,21 @@ function SearchQuery({ setGuesses }) {
         )}
         useCache={false}
         onChange={(selected) => {
-          console.log(selected);
-          setSelected(selected[0]);
+          setSelected(selected);
         }}
+        selected={selected}
       />
       <Button
         variant="primary"
         onClick={() => {
-          if (selected.id) {
+          if (selected.length > 0 && selected[0].id) {
             setGuesses((prev) => [
-              selected,
-              ...prev.filter((g) => g.id !== selected.id),
+              selected[0],
+              ...prev.filter((g) => g.id !== selected[0].id),
             ]);
           }
+          setQuery('');
+          setSelected([]);
         }}
       >
         Guess
