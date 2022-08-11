@@ -61,26 +61,30 @@ function App() {
       return;
     }
     const isDuplicate = guesses.some((guess) => guess.id === movie.id);
+
     if (isDuplicate) {
       setGameState('win');
-      setScore({
+      setScore((score) => ({
         wins: score.wins + 1,
         losses: score.losses,
         numGuesses: [...score.numGuesses, guesses.length],
-      });
-      localStorage.setItem('score', JSON.stringify(score));
+      }));
       return;
     }
+
     if (guesses.length === 6) {
       setGameState('lose');
-      setScore({
+      setScore((score) => ({
         wins: score.wins,
         losses: score.losses + 1,
         numGuesses: score.numGuesses,
-      });
-      localStorage.setItem('score', JSON.stringify(score));
+      }));
     }
   }, [guesses, movie, gameState]);
+
+  useEffect(() => {
+    localStorage.setItem('score', JSON.stringify(score));
+  }, [score]);
 
   useEffect(() => {
     localStorage.setItem('guesses', JSON.stringify(guesses));
