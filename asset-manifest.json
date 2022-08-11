@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/Guess-Movie/static/css/main.e3103e40.css",
-    "main.js": "/Guess-Movie/static/js/main.1ed5806d.js",
+    "main.js": "/Guess-Movie/static/js/main.6d9a039a.js",
     "static/js/787.ffd1f279.chunk.js": "/Guess-Movie/static/js/787.ffd1f279.chunk.js",
+    "static/media/Nope.gif": "/Guess-Movie/static/media/Nope.5690c9e1c93fbb8e5329.gif",
     "index.html": "/Guess-Movie/index.html",
     "main.e3103e40.css.map": "/Guess-Movie/static/css/main.e3103e40.css.map",
-    "main.1ed5806d.js.map": "/Guess-Movie/static/js/main.1ed5806d.js.map",
+    "main.6d9a039a.js.map": "/Guess-Movie/static/js/main.6d9a039a.js.map",
     "787.ffd1f279.chunk.js.map": "/Guess-Movie/static/js/787.ffd1f279.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e3103e40.css",
-    "static/js/main.1ed5806d.js"
+    "static/js/main.6d9a039a.js"
   ]
 }
