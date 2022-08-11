@@ -9,13 +9,13 @@ const Actor = ({ actor, visible }) => {
     return null;
   }
 
-  let src = '/placeholder.png';
+  let src = 'placeholder.png';
   let title = '';
 
   if (visible) {
     title = actor.name;
     if (images && actor.profile_path) {
-      src = `${images.base_url}/${images.profile_sizes[1]}/${actor.profile_path}`;
+      src = `${images.secure_base_url}/${images.profile_sizes[1]}/${actor.profile_path}`;
     }
   }
 
