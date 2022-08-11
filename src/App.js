@@ -42,28 +42,13 @@ function App() {
       <Row>
         <Col>
           {cast.length > 0 && (
-            <Row>
-              {cast.slice(0, 3).map((actor, index) => (
-                <Col key={actor.id}>
-                  <Actor
-                    key={actor.id}
-                    actor={actor}
-                    visible={index < guesses.length + 1}
-                  />
-                </Col>
-              ))}
-            </Row>
-          )}
-          {cast.length > 3 && (
-            <Row>
-              {cast.slice(3, 6).map((actor, index) => (
-                <Col key={actor.id}>
-                  <Actor
-                    key={actor.id}
-                    actor={actor}
-                    visible={index + 3 < guesses.length + 1}
-                  />
-                </Col>
+            <Row className="justify-content-center">
+              {cast.map((actor, index) => (
+                <Actor
+                  key={actor.id}
+                  actor={actor}
+                  visible={index < guesses.length + 1}
+                />
               ))}
             </Row>
           )}

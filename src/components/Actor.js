@@ -10,7 +10,13 @@ const Actor = ({ actor, visible }) => {
   }
 
   return (
-    <Card style={{ width: '150px' }}>
+    <Card
+      style={{
+        width: '150px',
+        padding: '0',
+        margin: '5px 10px',
+      }}
+    >
       {images && actor.profile_path && (
         <Card.Img
           variant="top"
