@@ -5,7 +5,7 @@ import { useImageData } from '../lib/Api';
 const Actor = ({ actor, visible }) => {
   const images = useImageData();
 
-  if (actor === null || !visible) {
+  if (actor === null) {
     return null;
   }
 
@@ -13,8 +13,6 @@ const Actor = ({ actor, visible }) => {
     <Card
       style={{
         width: '150px',
-        padding: '0',
-        margin: '5px 10px',
       }}
     >
       {images && actor.profile_path && (

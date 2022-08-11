@@ -1,29 +1,25 @@
 import React, { useCallback, useState } from 'react';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { render } from 'react-dom';
 import { fetchData } from '../lib/Api';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-
 
 const CACHE = {};
 const PER_PAGE = 50;
 
 function makeAndHandleRequest(query, page = 1) {
-
-  return fetchData("/search/movie", {
+  return fetchData('/search/movie', {
     query: query,
     page: page,
-  })
-  .then((resp) => {
+  }).then((resp) => {
     console.log(resp);
     const options = resp.results.map((r) => ({
-        title: r.title,
-        release_date: r.release_date,
-        id: r.id,
+      title: r.title,
+      release_date: r.release_date,
+      id: r.id,
     }));
-    return {options, total_count: resp.total_results }
-  })
+    return { options, total_count: resp.total_results };
+  });
 }
 
 function SearchQuery() {
@@ -84,7 +80,7 @@ function SearchQuery() {
     <AsyncTypeahead
       id="async-pagination-example"
       isLoading={isLoading}
-      labelKey='title'
+      labelKey="title"
       maxResults={PER_PAGE - 1}
       minLength={2}
       onInputChange={handleInputChange}
@@ -95,7 +91,9 @@ function SearchQuery() {
       placeholder="Search For A Movie..."
       renderMenuItemChildren={(option) => (
         <div key={option.id}>
-          <span>{option.title} ({option.release_date.slice(0, 4)})</span>
+          <span>
+            {option.title} ({option.release_date.slice(0, 4)})
+          </span>
         </div>
       )}
       useCache={false}
