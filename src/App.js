@@ -4,6 +4,7 @@ import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
 import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
+import myGif from './assets/Nope.gif';
 
 function App() {
   const [movie, setMovie] = useState(
@@ -110,6 +111,9 @@ function App() {
         <Row>
           <Col>
             <h5 className="text-center">
+              <div>
+                <img src={myGif} alt="my-gif" />
+              </div>
               You ran out of guesses! <br />
               <span className="text-danger">
                 {movie.title} (
