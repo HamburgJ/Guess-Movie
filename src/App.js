@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, FormGroup } from 'react-bootstrap';
+import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import Actor from './components/Actor';
 import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
@@ -24,7 +24,7 @@ function App() {
     if (!movie.id) {
       selectMovie();
     }
-  }, []);
+  }, [movie.id]);
 
   useEffect(() => {
     if (movie.id) {
@@ -136,13 +136,22 @@ function App() {
         </Row>
       )}
       {gameState !== 'playing' && (
-        <Row>
+        <Row className="text-center" style={{ marginBottom: '15px' }}>
           <Col>
-            <FormGroup className="text-center">
-              <Button variant="primary" onClick={() => resetGame()}>
-                Play Again
-              </Button>
-            </FormGroup>
+            <Button variant="primary" onClick={() => resetGame()}>
+              Play Again
+            </Button>
+          </Col>
+        </Row>
+      )}
+      {guesses.length > 0 && (
+        <Row>
+          <Col xs={{ offset: 2, span: 8 }}>
+            <ListGroup>
+              {guesses.map((guess, idx) => (
+                <ListGroup.Item variant="danger">{guess.title}</ListGroup.Item>
+              ))}
+            </ListGroup>
           </Col>
         </Row>
       )}
