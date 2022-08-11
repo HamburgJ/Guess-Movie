@@ -62,10 +62,9 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <SearchQuery />
+          <SearchQuery setGuesses={setGuesses} />
         </Col>
       </Row>
-      
     </Container>
   );
 }
