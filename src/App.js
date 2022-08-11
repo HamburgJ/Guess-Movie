@@ -3,6 +3,7 @@ import Actor from './components/Actor';
 import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
 import { useEffect, useState } from 'react';
+import Confetti from 'react-confetti';
 
 function App() {
   const [movie, setMovie] = useState(
@@ -101,6 +102,7 @@ function App() {
                 {movie.release_date ? movie.release_date.slice(0, 4) : ''})
               </span>
             </h5>
+            <Confetti />
           </Col>
         </Row>
       )}
