@@ -79,7 +79,7 @@ function App() {
       });
       localStorage.setItem('score', JSON.stringify(score));
     }
-  }, [guesses, movie, gameState]);
+  }, [guesses, movie, gameState, score]);
 
   useEffect(() => {
     localStorage.setItem('guesses', JSON.stringify(guesses));
