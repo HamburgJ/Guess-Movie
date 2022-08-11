@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, FormGroup } from 'react-bootstrap';
 import Actor from './components/Actor';
 import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
@@ -34,7 +34,7 @@ function App() {
     if (guesses.length === 6) {
       setGameState('lose');
     }
-  }, [guesses, movie]);
+  }, [guesses, movie, gameState]);
 
   const resetGame = () => {
     setGuesses([]);
@@ -42,7 +42,6 @@ function App() {
     selectMovie();
   };
 
-  console.log(movie);
   const selectMovie = () => {
     //select random year between 1980 and current year
     const year =
@@ -119,9 +118,15 @@ function App() {
         </Row>
       )}
       {gameState !== 'playing' && (
-        <Button variant="primary" onClick={() => resetGame()}>
-          Play Again
-        </Button>
+        <Row>
+          <Col>
+            <FormGroup className="text-center">
+              <Button variant="primary" onClick={() => resetGame()}>
+                Play Again
+              </Button>
+            </FormGroup>
+          </Col>
+        </Row>
       )}
     </Container>
   );

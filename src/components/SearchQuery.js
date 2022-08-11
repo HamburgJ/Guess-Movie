@@ -1,5 +1,5 @@
-import React, { Fragment, useCallback, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useCallback, useState } from 'react';
+import { Button, Row, Col } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { fetchData } from '../lib/Api';
 
@@ -76,54 +76,57 @@ function SearchQuery({ setGuesses }) {
     });
   }, []);
 
-  //console.log(options);
   return (
-    <Fragment>
-      <AsyncTypeahead
-        id="async-pagination-example"
-        isLoading={isLoading}
-        labelKey="title"
-        maxResults={PER_PAGE - 1}
-        minLength={2}
-        onInputChange={handleInputChange}
-        onPaginate={handlePagination}
-        onSearch={handleSearch}
-        options={options}
-        paginate
-        placeholder="Search For A Movie..."
-        renderMenuItemChildren={(option) => (
-          <div key={option.id}>
-            <span>
-              {`${option.title}${
-                option.release_date
-                  ? ` (${option.release_date.slice(0, 4)})`
-                  : ''
-              }`}
-            </span>
-          </div>
-        )}
-        useCache={false}
-        onChange={(selected) => {
-          setSelected(selected);
-        }}
-        selected={selected}
-      />
-      <Button
-        variant="primary"
-        onClick={() => {
-          if (selected.length > 0 && selected[0].id) {
-            setGuesses((prev) => [
-              selected[0],
-              ...prev.filter((g) => g.id !== selected[0].id),
-            ]);
-          }
-          setQuery('');
-          setSelected([]);
-        }}
-      >
-        Guess
-      </Button>
-    </Fragment>
+    <Row>
+      <Col xs={{ offset: 2, span: 6 }}>
+        <AsyncTypeahead
+          id="async-pagination-example"
+          isLoading={isLoading}
+          labelKey="title"
+          maxResults={PER_PAGE - 1}
+          minLength={2}
+          onInputChange={handleInputChange}
+          onPaginate={handlePagination}
+          onSearch={handleSearch}
+          options={options}
+          paginate
+          placeholder="Search For A Movie..."
+          renderMenuItemChildren={(option) => (
+            <div key={option.id}>
+              <span>
+                {`${option.title}${
+                  option.release_date
+                    ? ` (${option.release_date.slice(0, 4)})`
+                    : ''
+                }`}
+              </span>
+            </div>
+          )}
+          useCache={false}
+          onChange={(selected) => {
+            setSelected(selected);
+          }}
+          selected={selected}
+        />
+      </Col>
+      <Col xs={2}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            if (selected.length > 0 && selected[0].id) {
+              setGuesses((prev) => [
+                selected[0],
+                ...prev.filter((g) => g.id !== selected[0].id),
+              ]);
+            }
+            setQuery('');
+            setSelected([]);
+          }}
+        >
+          Guess
+        </Button>
+      </Col>
+    </Row>
   );
 }
 

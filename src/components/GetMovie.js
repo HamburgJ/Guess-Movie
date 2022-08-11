@@ -7,8 +7,6 @@ const GetMovie = () => {
     fetchData('/movie/550', {}).then((data) => setData(data));
   }, []);
 
-  console.log(data);
-
   return (
     <div>
       <h1>GetMovie</h1>

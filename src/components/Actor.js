@@ -20,7 +20,7 @@ const Actor = ({ actor, visible }) => {
   }
 
   return (
-    <Card>
+    <Card style={{ marginBottom: '15px' }}>
       <Card.Img variant="top" src={src} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
