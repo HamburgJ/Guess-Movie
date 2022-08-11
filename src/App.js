@@ -5,19 +5,32 @@ import { fetchData } from './lib/Api';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [movie, setMovie] = useState({});
-  const [cast, setCast] = useState([]);
-  const [guesses, setGuesses] = useState([]);
+  const [movie, setMovie] = useState(
+    localStorage.getItem('movie')
+      ? JSON.parse(localStorage.getItem('movie'))
+      : {}
+  );
+  const [cast, setCast] = useState(
+    localStorage.getItem('cast') ? JSON.parse(localStorage.getItem('cast')) : []
+  );
+  const [guesses, setGuesses] = useState(
+    localStorage.getItem('guesses')
+      ? JSON.parse(localStorage.getItem('guesses'))
+      : []
+  );
   const [gameState, setGameState] = useState('playing');
 
   useEffect(() => {
-    selectMovie();
+    if (!movie.id) {
+      selectMovie();
+    }
   }, []);
 
   useEffect(() => {
     if (movie.id) {
       fetchData(`/movie/${movie.id}/credits`, {}).then((data) => {
         setCast(data.cast.slice(0, 6));
+        localStorage.setItem('cast', JSON.stringify(data.cast.slice(0, 6)));
       });
     }
   }, [movie]);
@@ -35,6 +48,10 @@ function App() {
       setGameState('lose');
     }
   }, [guesses, movie]);
+
+  useEffect(() => {
+    localStorage.setItem('guesses', JSON.stringify(guesses));
+  }, [guesses]);
 
   const resetGame = () => {
     setGuesses([]);
@@ -56,6 +73,7 @@ function App() {
       without_genres: '16,18',
     }).then((data) => {
       setMovie(data.results[index]);
+      localStorage.setItem('movie', JSON.stringify(data.results[index]));
     });
   };
 
