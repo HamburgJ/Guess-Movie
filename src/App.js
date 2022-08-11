@@ -76,6 +76,7 @@ function App() {
       setScore({
         wins: score.wins,
         losses: score.losses + 1,
+        ...score,
       });
       localStorage.setItem('score', JSON.stringify(score));
     }
@@ -120,11 +121,8 @@ function App() {
         value: (num.length * 100) / data.numGuesses.length,
       });
     });
-    console.log(dataObjs);
     return dataObjs;
   };
-
-  console.log(movie);
 
   return (
     <Container>
