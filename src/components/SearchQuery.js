@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { render } from 'react-dom';
 import { fetchData } from '../lib/Api';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';

@@ -42,6 +42,11 @@ function App() {
       </Row>
       <Row>
         <Col>
+          <h4 className='text-center'>An actors name and photo will pop up on the screen, guess which movie they are from! You have six guesses. Good luck!</h4>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           {cast.length > 0 && (
             <Row className="justify-content-center">
               {cast.map((actor, index) => (
