@@ -1,5 +1,5 @@
 import { api_key } from './Constants';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 const base_url = 'https://api.themoviedb.org/3';
 
 export const fetchData = (route, params = {}) => {

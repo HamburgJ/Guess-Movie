@@ -40,19 +40,17 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <Col>
-          {cast.length > 0 && (
-            <Row className="justify-content-center">
-              {cast.map((actor, index) => (
-                <Actor
-                  key={actor.id}
-                  actor={actor}
-                  visible={index < guesses.length + 1}
-                />
-              ))}
-            </Row>
-          )}
-        </Col>
+        {cast.length > 0 && (
+          <Col xs={2}>
+            {cast.map((actor, index) => (
+              <Actor
+                key={actor.id}
+                actor={actor}
+                visible={index < guesses.length + 1}
+              />
+            ))}
+          </Col>
+        )}
       </Row>
       <Row>
         <Col>
