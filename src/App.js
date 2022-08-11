@@ -151,7 +151,10 @@ function App() {
           <Col xs={{ offset: 2, span: 8 }}>
             <ListGroup>
               {guesses.map((guess, idx) => (
-                <ListGroup.Item key={idx} variant="danger">
+                <ListGroup.Item
+                  key={idx}
+                  variant={gameState === 'win' ? 'success' : 'danger'}
+                >
                   {guess.title}
                 </ListGroup.Item>
               ))}
