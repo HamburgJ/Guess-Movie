@@ -1,9 +1,19 @@
-import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  FormGroup,
+  ListGroup,
+  Modal,
+} from 'react-bootstrap';
 import Actor from './components/Actor';
 import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
 import { useEffect, useState } from 'react';
+import Bars from 'react-bars';
 import Confetti from 'react-confetti';
+import myGif from './assets/Nope.gif';
 
 function App() {
   const [movie, setMovie] = useState(
@@ -19,7 +29,17 @@ function App() {
       ? JSON.parse(localStorage.getItem('guesses'))
       : []
   );
+  const [score, setScore] = useState(
+    localStorage.getItem('score')
+      ? JSON.parse(localStorage.getItem('score'))
+      : {
+          wins: 0,
+          losses: 0,
+          numGuesses: [],
+        }
+  );
   const [gameState, setGameState] = useState('playing');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (!movie.id) {
@@ -43,10 +63,21 @@ function App() {
     const isDuplicate = guesses.some((guess) => guess.id === movie.id);
     if (isDuplicate) {
       setGameState('win');
+      setScore({
+        wins: score.wins + 1,
+        losses: score.losses,
+        numGuesses: [...score.numGuesses, guesses.length],
+      });
+      localStorage.setItem('score', JSON.stringify(score));
       return;
     }
     if (guesses.length === 6) {
       setGameState('lose');
+      setScore({
+        wins: score.wins,
+        losses: score.losses + 1,
+      });
+      localStorage.setItem('score', JSON.stringify(score));
     }
   }, [guesses, movie, gameState]);
 
@@ -77,6 +108,24 @@ function App() {
     });
   };
 
+  const parseData = (data) => {
+    const labels = ['1', '2', '3', '4', '5', '6'];
+    const dataObjs = [];
+    labels.forEach((label) => {
+      const num = data.numGuesses.filter((guess) => {
+        return guess === parseInt(label);
+      });
+      dataObjs.push({
+        label,
+        value: (num.length * 100) / data.numGuesses.length,
+      });
+    });
+    console.log(dataObjs);
+    return dataObjs;
+  };
+
+  console.log(movie);
+
   return (
     <Container>
       <Row>
@@ -87,7 +136,7 @@ function App() {
       <Row>
         <Col>
           <h4 className="text-center">
-            An actors name and photo will pop up on the screen, guess which
+            An actor's name and photo will pop up on the screen, guess which
             movie they are from! You have six guesses. Good luck!
           </h4>
         </Col>
@@ -110,6 +159,9 @@ function App() {
         <Row>
           <Col>
             <h5 className="text-center">
+              <div>
+                <img src={myGif} alt="my-gif" />
+              </div>
               You ran out of guesses! <br />
               <span className="text-danger">
                 {movie.title} (
@@ -162,6 +214,37 @@ function App() {
           </Col>
         </Row>
       )}
+      <Row>
+        <Col>
+          <FormGroup className="text-center">
+            <Button variant="primary" onClick={() => setShowModal(true)}>
+              Score
+            </Button>
+          </FormGroup>
+        </Col>
+      </Row>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton />
+        <Modal.Body>
+          <h5 className="text-center">
+            {score.wins} {score.wins === 1 ? 'Win' : 'Wins'}, {score.losses}{' '}
+            {score.losses === 1 ? 'Loss' : 'Losses'}
+          </h5>
+          <h6 className="text-center">Guess Distribution</h6>
+          <Bars
+            style={{
+              borderRadius: '0px',
+              margin: '0 auto',
+              width: '100%',
+              height: '20px',
+            }}
+            data={parseData(score)}
+            verticalSpacing={0}
+            barBackgroundColor={'#303030'}
+            barColor={'#111111'}
+          />
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 }
