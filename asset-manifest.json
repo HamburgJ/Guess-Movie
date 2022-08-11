@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/guess-movie/static/css/main.e3103e40.css",
-    "main.js": "/guess-movie/static/js/main.d007e98b.js",
-    "static/js/787.ffd1f279.chunk.js": "/guess-movie/static/js/787.ffd1f279.chunk.js",
-    "index.html": "/guess-movie/index.html",
-    "main.e3103e40.css.map": "/guess-movie/static/css/main.e3103e40.css.map",
-    "main.d007e98b.js.map": "/guess-movie/static/js/main.d007e98b.js.map",
-    "787.ffd1f279.chunk.js.map": "/guess-movie/static/js/787.ffd1f279.chunk.js.map"
+    "main.css": "/Guess-Movie/static/css/main.e3103e40.css",
+    "main.js": "/Guess-Movie/static/js/main.a5c1ffb6.js",
+    "static/js/787.ffd1f279.chunk.js": "/Guess-Movie/static/js/787.ffd1f279.chunk.js",
+    "index.html": "/Guess-Movie/index.html",
+    "main.e3103e40.css.map": "/Guess-Movie/static/css/main.e3103e40.css.map",
+    "main.a5c1ffb6.js.map": "/Guess-Movie/static/js/main.a5c1ffb6.js.map",
+    "787.ffd1f279.chunk.js.map": "/Guess-Movie/static/js/787.ffd1f279.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e3103e40.css",
-    "static/js/main.d007e98b.js"
+    "static/js/main.a5c1ffb6.js"
   ]
 }
