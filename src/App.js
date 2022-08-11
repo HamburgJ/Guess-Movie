@@ -76,7 +76,7 @@ function App() {
       setScore({
         wins: score.wins,
         losses: score.losses + 1,
-        ...score,
+        numGuesses: score.numGuesses,
       });
       localStorage.setItem('score', JSON.stringify(score));
     }
@@ -215,14 +215,20 @@ function App() {
       <Row>
         <Col>
           <FormGroup className="text-center">
-            <Button variant="primary" onClick={() => setShowModal(true)}>
-              Score
+            <Button
+              variant="primary"
+              onClick={() => setShowModal(true)}
+              style={{
+                marginTop: '15px',
+              }}
+            >
+              Statistics
             </Button>
           </FormGroup>
         </Col>
       </Row>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton />
+        <Modal.Header closeButton>Statistics</Modal.Header>
         <Modal.Body>
           <h5 className="text-center">
             {score.wins} {score.wins === 1 ? 'Win' : 'Wins'}, {score.losses}{' '}
