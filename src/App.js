@@ -1,5 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Actor from './components/Actor';
+import SearchQuery from './components/SearchQuery';
 import { fetchData } from './lib/Api';
 import { useEffect, useState } from 'react';
 
@@ -54,16 +55,10 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <div class="input-group">
-            <input
-              type="search"
-              id="form1"
-              class="form-control"
-              placeholder="Enter Movie Name Here"
-            />
-          </div>
+          <SearchQuery />
         </Col>
       </Row>
+      
     </Container>
   );
 }
