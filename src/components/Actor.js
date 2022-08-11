@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card } from 'react-bootstrap';
-import { fetchData, useImageData } from '../lib/Api';
+import { useImageData } from '../lib/Api';
 
-const Actor = () => {
-  const [actor, setActor] = useState(null);
+const Actor = ({ actor, visible }) => {
   const images = useImageData();
 
-  useEffect(() => {
-    fetchData('/person/73457').then((result) => {
-      console.log(result);
-      setActor(result);
-    });
-  }, []);
-
-  if (actor === null) {
+  if (actor === null || !visible) {
     return null;
   }
 
