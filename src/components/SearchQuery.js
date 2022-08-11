@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { Fragment, useCallback, useState } from 'react';
+import { Button, Row } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { fetchData } from '../lib/Api';
 
@@ -12,7 +13,6 @@ function makeAndHandleRequest(query, page = 1) {
     query: query,
     page: page,
   }).then((resp) => {
-    console.log(resp);
     const options = resp.results.map((r) => ({
       title: r.title,
       release_date: r.release_date,
@@ -22,10 +22,11 @@ function makeAndHandleRequest(query, page = 1) {
   });
 }
 
-function SearchQuery() {
+function SearchQuery({ setGuesses }) {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
   const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState({});
 
   const handleInputChange = (q) => {
     setQuery(q);
@@ -75,29 +76,48 @@ function SearchQuery() {
     });
   }, []);
 
-  console.log(options);
+  //console.log(options);
   return (
-    <AsyncTypeahead
-      id="async-pagination-example"
-      isLoading={isLoading}
-      labelKey="title"
-      maxResults={PER_PAGE - 1}
-      minLength={2}
-      onInputChange={handleInputChange}
-      onPaginate={handlePagination}
-      onSearch={handleSearch}
-      options={options}
-      paginate
-      placeholder="Search For A Movie..."
-      renderMenuItemChildren={(option) => (
-        <div key={option.id}>
-          <span>
-            {option.title} ({option.release_date.slice(0, 4)})
-          </span>
-        </div>
-      )}
-      useCache={false}
-    />
+    <Fragment>
+      <AsyncTypeahead
+        id="async-pagination-example"
+        isLoading={isLoading}
+        labelKey="title"
+        maxResults={PER_PAGE - 1}
+        minLength={2}
+        onInputChange={handleInputChange}
+        onPaginate={handlePagination}
+        onSearch={handleSearch}
+        options={options}
+        paginate
+        placeholder="Search For A Movie..."
+        renderMenuItemChildren={(option) => (
+          <div key={option.id}>
+            <span>
+              {option.title} ({option.release_date.slice(0, 4)})
+            </span>
+          </div>
+        )}
+        useCache={false}
+        onChange={(selected) => {
+          console.log(selected);
+          setSelected(selected[0]);
+        }}
+      />
+      <Button
+        variant="primary"
+        onClick={() => {
+          if (selected.id) {
+            setGuesses((prev) => [
+              selected,
+              ...prev.filter((g) => g.id !== selected.id),
+            ]);
+          }
+        }}
+      >
+        Guess
+      </Button>
+    </Fragment>
   );
 }
 

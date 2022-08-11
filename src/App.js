@@ -41,6 +41,14 @@ function App() {
         </Col>
       </Row>
       <Row>
+        <Col>
+          <h4 className="text-center">
+            An actors name and photo will pop up on the screen, guess which
+            movie they are from! You have six guesses. Good luck!
+          </h4>
+        </Col>
+      </Row>
+      <Row>
         {cast.length > 0 &&
           cast.map((actor, index) => (
             <Col xs={2}>
@@ -54,7 +62,7 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <SearchQuery />
+          <SearchQuery setGuesses={setGuesses} />
         </Col>
       </Row>
     </Container>
