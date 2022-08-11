@@ -51,12 +51,8 @@ function App() {
       <Row>
         {cast.length > 0 &&
           cast.map((actor, index) => (
-            <Col xs={2}>
-              <Actor
-                key={actor.id}
-                actor={actor}
-                visible={index < guesses.length + 1}
-              />
+            <Col xs={2} key={actor.id}>
+              <Actor actor={actor} visible={index < guesses.length + 1} />
             </Col>
           ))}
       </Row>
